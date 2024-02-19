@@ -24,7 +24,7 @@ public class Peliculas {
     private String duracion;
     @Column(nullable = false)
     private Boolean status;
-
-    @OneToOne(mappedBy = "pelicula", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "genero")
     private Genero genero;
 }

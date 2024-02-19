@@ -1,7 +1,9 @@
 package com.mx.peliculas.controller.peliculas;
 
 import com.mx.peliculas.controller.peliculas.Dto.PeliculasDto;
+import com.mx.peliculas.models.genero.Genero;
 import com.mx.peliculas.models.peliculas.Peliculas;
+import com.mx.peliculas.services.genero.GeneroServices;
 import com.mx.peliculas.services.peliculas.PeluculasServices;
 import com.mx.peliculas.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +20,19 @@ public class PeliculasController {
 
     @Autowired
     PeluculasServices services;
+    @Autowired
+    private GeneroServices generoServices;
 
     @GetMapping("/")
     public ResponseEntity<Response<List<Peliculas>>> getAll(){
         return new ResponseEntity<>(
                 this.services.getAll(), HttpStatus.OK
+        );
+    }
+    @GetMapping("/genero/")
+    public ResponseEntity<Response<List<Genero>>> getAllGenero(){
+        return new ResponseEntity<>(
+                this.generoServices.getAll(), HttpStatus.OK
         );
     }
 

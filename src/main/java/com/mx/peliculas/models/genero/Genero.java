@@ -20,8 +20,4 @@ public class Genero {
     @Column(nullable = false, length = 50)
     private String genero;
 
-    @OneToOne
-    @JsonIgnore
-    @JoinColumn(name = "peliculas_id")
-    private Peliculas pelicula;
 }
