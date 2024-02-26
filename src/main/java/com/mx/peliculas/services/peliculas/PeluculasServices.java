@@ -3,6 +3,7 @@ package com.mx.peliculas.services.peliculas;
 import com.mx.peliculas.controller.peliculas.Dto.PeliculasDto;
 import com.mx.peliculas.models.genero.Genero;
 import com.mx.peliculas.models.peliculas.Peliculas;
+import com.mx.peliculas.repositories.genero.GeneroRepositorio;
 import com.mx.peliculas.repositories.peliculas.PeliculaRepository;
 import com.mx.peliculas.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import java.util.Optional;
 public class PeluculasServices {
     @Autowired
     private PeliculaRepository repository;
+    @Autowired
+    private GeneroRepositorio generoRepositorio;
 
     @Transactional(readOnly = true)
     public Response<List<Peliculas>> getAll(){
@@ -130,10 +133,11 @@ public class PeluculasServices {
 
     @Transactional(readOnly = true)
     public Response<List<Peliculas>> findByGenero(Long id){
-        List<Peliculas> genero = this.repository.findByGenero_Id(id);
-        if (!genero.isEmpty()){
+        Genero genero = this.generoRepositorio.findById(id).get();
+        List<Peliculas> generos = this.repository.findAllByGenero(genero);
+        if (!generos.isEmpty()){
             return new Response<>(
-                    genero,
+                    generos,
                     false,
                     200,
                     "OK"
