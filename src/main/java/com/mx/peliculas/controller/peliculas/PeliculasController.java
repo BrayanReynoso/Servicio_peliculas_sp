@@ -65,10 +65,10 @@ public class PeliculasController {
         );
     }
 
-    @GetMapping("/genero/")
-    public ResponseEntity<Response<Object>> findByGenero(@RequestBody PeliculasDto p) {
+    @GetMapping("/genero/{id}")
+    public ResponseEntity<Response<List<Peliculas>>> findByGenero(@PathVariable("id") Long id) {
         return new ResponseEntity<>(
-               this.services.finByGenero(p.getGenero()), HttpStatus.OK
+               this.services.findByGenero(id), HttpStatus.OK
         );
     }
 
@@ -85,10 +85,10 @@ public class PeliculasController {
                 this.services.findByOrderDate(), HttpStatus.OK
         );
     }
-    @GetMapping("/busqueda/")
-    public ResponseEntity<List<Peliculas>> findByNameContraing(@RequestBody Peliculas p){
+    @PostMapping("/busqueda/{nombre}")
+    public ResponseEntity<List<Peliculas>> findByNombreContraing(@PathVariable("nombre") String nombre){
         return new ResponseEntity<>(
-               this.services.findByNombreContraing(p.getNombre()).getData(), HttpStatus.OK
+               this.services.findByNombreContraing(nombre).getData(), HttpStatus.OK
         );
     }
 }

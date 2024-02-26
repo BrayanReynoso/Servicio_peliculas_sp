@@ -21,7 +21,7 @@ public interface PeliculaRepository extends JpaRepository<Peliculas, Long> {
 
     List<Peliculas> findByDirectorContaining(String director);
 
-    List<Peliculas> findByGenero(Genero genero);
+    List<Peliculas> findByGenero_Id(Long id);
 
     List<Peliculas> findByFechaPublicacionBetween(Date start, Date end);
 

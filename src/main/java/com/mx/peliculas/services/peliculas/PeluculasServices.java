@@ -128,15 +128,24 @@ public class PeluculasServices {
         );
     }
 
-        @Transactional(readOnly = true)
-        public Response<Object> finByGenero(Genero genero){
+    @Transactional(readOnly = true)
+    public Response<List<Peliculas>> findByGenero(Long id){
+        List<Peliculas> genero = this.repository.findByGenero_Id(id);
+        if (!genero.isEmpty()){
             return new Response<>(
-                    this.repository.findByGenero(genero),
+                    genero,
                     false,
                     200,
                     "OK"
             );
         }
+        return new Response<>(
+                null,
+                true,
+                400,
+                "Error data is empty"
+        );
+    }
 
     @Transactional(readOnly = true)
     public Response<Object> findByOrderDate(){

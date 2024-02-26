@@ -18,7 +18,7 @@ import java.util.Date;
 public class Peliculas {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     @Column(nullable = false, length = 50)
     private String nombre;
     @Column(nullable = false, length = 100)
