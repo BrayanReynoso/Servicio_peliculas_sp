@@ -1,5 +1,7 @@
 package com.mx.peliculas.services.peliculas;
 
+import com.mx.peliculas.controller.peliculas.Dto.PeliculasDto;
+import com.mx.peliculas.models.genero.Genero;
 import com.mx.peliculas.models.peliculas.Peliculas;
 import com.mx.peliculas.repositories.peliculas.PeliculaRepository;
 import com.mx.peliculas.utils.Response;
@@ -93,6 +95,57 @@ public class PeluculasServices {
                 400,
                 "Error in change status, Check your data!!"
         );
-
     }
+
+
+    //Consultas
+    @Transactional(readOnly = true)
+    public Response<Object> findByDirector(Peliculas p) {
+        if (p.getDirector() == null || p.getDirector().isEmpty()) {
+            return new Response<>(
+                    null,
+                    true,
+                    400,
+                    "No se encontro el director"
+            );
+        }
+        return new Response<>(
+                this.repository.findByDirectorContaining(p.getDirector()),
+                false,
+                200,
+                "Ok"
+        );
+    }
+
+
+    @Transactional(readOnly = true)
+    public Response<Object> findPublicacionDateBetweenDate(PeliculasDto p){
+        return new Response<>(
+                this.repository.findByFechaPublicacionBetween(p.getStartDate(), p.getEndDate()),
+                false,
+                200,
+                "OK"
+        );
+    }
+
+        @Transactional(readOnly = true)
+        public Response<Object> finByGenero(Genero genero){
+            return new Response<>(
+                    this.repository.findByGenero(genero),
+                    false,
+                    200,
+                    "OK"
+            );
+        }
+
+    @Transactional(readOnly = true)
+    public Response<Object> findByOrderDate(){
+        return new Response<>(
+                this.repository.findByOrderByFechaPublicacionDesc(),
+                false,
+                200,
+                "OK"
+        );
+    }
+
 }

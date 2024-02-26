@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -17,8 +20,10 @@ public class PeliculasDto {
     private String director;
     private String duracion;
     private Boolean status;
+    private Date fechaPublicacion;
     private Genero genero;
-
+    private Date startDate;
+    private Date endDate;
     public Peliculas getPeliculas(){
         return new Peliculas(
                 getId(),
@@ -26,7 +31,16 @@ public class PeliculasDto {
                 getDirector(),
                 getDuracion(),
                 getStatus(),
+               getFechaPublicacion(),
                 getGenero()
         );
     }
+    public Date getSatartDate(){
+        try {
+            return new SimpleDateFormat("yyyy/MM/dd").parse(String.valueOf(startDate));
+        }catch (Exception e){
+            return null;
+        }
+    }
+
 }

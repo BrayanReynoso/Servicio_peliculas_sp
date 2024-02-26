@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Date;
+
 @Entity
 @Getter
 @Setter
@@ -24,6 +27,8 @@ public class Peliculas {
     private String duracion;
     @Column(nullable = false)
     private Boolean status;
+    @Column(nullable = false)
+    private Date fechaPublicacion;
     @ManyToOne
     @JoinColumn(name = "genero")
     private Genero genero;

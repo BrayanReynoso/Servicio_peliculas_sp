@@ -29,7 +29,7 @@ public class PeliculasController {
                 this.services.getAll(), HttpStatus.OK
         );
     }
-    @GetMapping("/genero/")
+    @GetMapping("/gen/")
     public ResponseEntity<Response<List<Genero>>> getAllGenero(){
         return new ResponseEntity<>(
                 this.generoServices.getAll(), HttpStatus.OK
@@ -54,6 +54,35 @@ public class PeliculasController {
     public ResponseEntity<Response<Peliculas>> delete(@PathVariable("id") long id){
         return new ResponseEntity<>(
                 this.services.changeStatus(id), HttpStatus.OK
+        );
+    }
+
+
+    @GetMapping("/director/")
+    public ResponseEntity<Response<Object>> findByDirector(@RequestBody PeliculasDto p) {
+        return new ResponseEntity<>(
+                this.services.findByDirector(p.getPeliculas()), HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/genero/")
+    public ResponseEntity<Response<Object>> findByGenero(@RequestBody PeliculasDto p) {
+        return new ResponseEntity<>(
+               this.services.finByGenero(p.getGenero()), HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/dateBetween/")
+    public ResponseEntity<Response<Object>> findPublicacionDateBetweenDate(@RequestBody PeliculasDto p) {
+        return new ResponseEntity<>(
+                this.services.findPublicacionDateBetweenDate(p), HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/orderDate/")
+    public ResponseEntity<Response<Object>> findByOrderDate() {
+        return new ResponseEntity<>(
+                this.services.findByOrderDate(), HttpStatus.OK
         );
     }
 }
