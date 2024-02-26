@@ -26,4 +26,5 @@ public interface PeliculaRepository extends JpaRepository<Peliculas, Long> {
     List<Peliculas> findByFechaPublicacionBetween(Date start, Date end);
 
     List<Peliculas> findByOrderByFechaPublicacionDesc();
+
 }

@@ -147,5 +147,23 @@ public class PeluculasServices {
                 "OK"
         );
     }
+    @Transactional(readOnly = true)
+    public Response<List<Peliculas>> findByNombreContraing(String nombre){
+        List<Peliculas> peliculas = this.repository.findByNombreContaining(nombre);
+        if (!peliculas.isEmpty()){
+            return new Response<>(
+                    peliculas,
+                    false,
+                    200,
+                    "OK"
+            );
+        }
+        return new Response<>(
+                null,
+                false,
+                200,
+                "Data is empty"
+        );
+    }
 
 }

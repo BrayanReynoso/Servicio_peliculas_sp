@@ -85,4 +85,10 @@ public class PeliculasController {
                 this.services.findByOrderDate(), HttpStatus.OK
         );
     }
+    @GetMapping("/busqueda/")
+    public ResponseEntity<List<Peliculas>> findByNameContraing(@RequestBody Peliculas p){
+        return new ResponseEntity<>(
+               this.services.findByNombreContraing(p.getNombre()).getData(), HttpStatus.OK
+        );
+    }
 }
